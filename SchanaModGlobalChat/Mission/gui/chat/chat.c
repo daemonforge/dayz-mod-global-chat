@@ -13,19 +13,26 @@ modded class Chat {
         }
     }
 	
-	override void AddInternal( ChatMessageEventParams params )
+	override void AddInternal ( ChatMessageEventParams params )
 	{
 		
         int channel = params.param1;
 		string rbeFrom = params.param2;
 		string rbeText = params.param3;
-		string radioFrom = rbeFrom.Substring(0,7); 
-		string radioText = rbeText.Substring(0,7);
-		if ( (radioFrom == "(Radio)" || radioText == "(Radio)") && radioText.Contains("ᐅ") ) 
+		string radioFrom = "";
+		string radioText = "";
+		if (rbeFrom.Length() > 7){
+			radioFrom = rbeFrom.Substring (0,7); 
+		}
+		if (rbeText.Length() > 7){
+			radioText = rbeText.Substring (0,7);
+		}
+		
+		if ( (radioFrom == "(Radio)" || radioText == "(Radio)") && radioText.Contains ("ᐅ") ) 
 		{
 			 return;
 		}
-		super.AddInternal( params );
+		super.AddInternal ( params );
 	}
 	
 }
